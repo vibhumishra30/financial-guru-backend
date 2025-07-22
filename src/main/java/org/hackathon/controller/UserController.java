@@ -3,12 +3,10 @@ package org.hackathon.controller;
 import org.hackathon.entity.LoginRequest;
 import org.hackathon.entity.User;
 import org.hackathon.repository.UserRepository;
+import org.hackathon.scheduler.Scheduler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,6 +15,9 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private Scheduler scheduler;
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
@@ -48,5 +49,16 @@ public class UserController {
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
+
+    @DeleteMapping("/user/delete")
+    public void deleteUser(@RequestBody Long id){
+        userRepository.deleteById(id);
+    }
+
+    @PostMapping("/send/manual")
+    public void sendManualMessage(){
+        scheduler.sendDailyMessage();
+    }
+
 }
 
