@@ -60,8 +60,8 @@ public class UserController {
     }
 
     @PostMapping("/subscription")
-    public void setSubscriptionFlag(@RequestBody SubscriptionRequest request){
-        userService.setSubscriptionStatus(request);
+    public String setSubscriptionFlag(@RequestBody SubscriptionRequest request){
+        return userService.setSubscriptionStatus(request.getEmail());
     }
 
 }
