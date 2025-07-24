@@ -18,4 +18,5 @@ public class User {
     private String email;
     private String contactNumber;
     private String password;
+    private Boolean subscription;
 }
