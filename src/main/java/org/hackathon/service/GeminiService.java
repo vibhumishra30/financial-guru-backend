@@ -23,7 +23,7 @@ public class GeminiService {
 
     public String getReplyFromGemini(String message) {
         System.out.println("API key" + apiKey);
-        String apiUrl = "https://generativelanguage.googleapis.com/v1/models/gemini-2.5-pro:generateContent?key=" + apiKey;
+        String apiUrl = "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=" + apiKey;
 
         // Request body for Gemini
         Map<String, Object> requestBody = new HashMap<>();
@@ -64,6 +64,4 @@ public class GeminiService {
 
         return getReplyFromGemini(fullPrompt.toString());
     }
-
-
 }

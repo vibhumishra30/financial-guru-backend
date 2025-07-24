@@ -58,9 +58,12 @@ public class WhatsAppController {
             return ResponseEntity.ok("OK");
         }
 
+        long start = System.currentTimeMillis();
         // 4. Store and fetch conversation history for context
         contextMemoryService.saveUserMessage(from, translatedInput);
         var history = contextMemoryService.getUserHistory(from);
+
+
 
         // 5. Build contextual Gemini prompt
         String prompt = "User Type: " + userProfileService.getUserType(from).name() + "\n";
@@ -72,8 +75,14 @@ public class WhatsAppController {
         String geminiReply = geminiService.getReplyFromGemini(prompt);
         reply = BotResponseUtil.withIntro(geminiReply);
 
+        long end = System.currentTimeMillis();
+        System.out.println("⏱ Gemini response time: " + (end - start) + "ms");
+
+        long startT = System.currentTimeMillis();
         // 7. Send reply back via Twilio
         twilioService.sendWhatsAppMessage(from, reply);
+        long endT = System.currentTimeMillis();
+        System.out.println("⏱ Twilio response time: " + (endT - startT) + "ms");
         return ResponseEntity.ok("OK");
     }
 
