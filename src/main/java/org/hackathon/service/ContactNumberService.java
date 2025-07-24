@@ -20,6 +20,7 @@ public class ContactNumberService {
         List<User> users = userRepository.findAll();
 
         return users.stream()
+                .filter(user -> user.getSubscription())
                 .map(User::getContactNumber)
                 .filter(number -> number != null && !number.trim().isEmpty())
                 .collect(Collectors.toList());

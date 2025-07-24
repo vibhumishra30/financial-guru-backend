@@ -29,7 +29,7 @@ public class NewsService {
 
         StringBuilder msg = new StringBuilder("🗞 *Top Financial News Today:*\n\n");
 
-        for (int i = 0; i < Math.min(5, articles.size()); i++) {
+        for (int i = 0; i < Math.min(1, articles.size()); i++) {
             NewsArticle article = articles.get(i);
             msg.append("🔹 *")
                .append(article.getTitle())
