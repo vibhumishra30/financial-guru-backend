@@ -54,4 +54,16 @@ public class GeminiService {
         }
     }
 
+    public String getReplyWithContext(List<String> contextMessages, String latestMessage) {
+        StringBuilder fullPrompt = new StringBuilder();
+
+        for (String line : contextMessages) {
+            fullPrompt.append("User: ").append(line).append("\n");
+        }
+        fullPrompt.append("User: ").append(latestMessage);
+
+        return getReplyFromGemini(fullPrompt.toString());
+    }
+
+
 }
