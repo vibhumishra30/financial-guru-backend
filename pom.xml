@@ -6,7 +6,7 @@
 
     <groupId>org.hackathon</groupId>
     <artifactId>financial-guru-backend</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.8-SNAPSHOT</version>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -72,6 +72,13 @@
             <artifactId>google-cloud-translate</artifactId>
             <version>2.30.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.7.2</version>
+        </dependency>
+
 
     </dependencies>
     <build>

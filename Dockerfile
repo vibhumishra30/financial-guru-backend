@@ -12,7 +12,7 @@ WORKDIR /app
 # RUN ls -la /app/target  <-- won't work here, so do it in builder if needed
 
 # Copy the JAR directly
-COPY --from=builder /app/target/financial-guru-backend-0.0.1-SNAPSHOT.jar app.jar
+COPY --from=builder /app/target/financial-guru-backend-0.0.8-SNAPSHOT.jar app.jar
 # Copy your local translation.json from resources to /secrets inside container
 COPY src/main/resources/translation.json /secrets/translation.json
 
