@@ -9,12 +9,35 @@ public class ChatbotService {
 
     private final ContextMemoryService contextMemoryService;
     private final UserProfileService userProfileService;
+    private final GeminiService geminiService;
 
-    public ChatbotService(ContextMemoryService contextMemoryService, UserProfileService userProfileService) {
+    public ChatbotService(ContextMemoryService contextMemoryService, UserProfileService userProfileService, GeminiService geminiService) {
         this.contextMemoryService = contextMemoryService;
         this.userProfileService = userProfileService;
+        this.geminiService = geminiService;
     }
 
+    public String processIncomingMessage(String from, String message) {
+        String reply = geminiService.getReplyFromGemini(message);
+        return sanitizeReply(reply);
+    }
+
+    public String sanitizeReply(String reply) {
+        if (reply == null || reply.isBlank()) return "";
+
+        String sanitized = reply.trim();
+
+        if (sanitized.equalsIgnoreCase("ok")) return "";
+        if (sanitized.toLowerCase().endsWith("\nok")) {
+            sanitized = sanitized.substring(0, sanitized.length() - 3).trim();
+        }
+
+        if (sanitized.length() > 7000) {
+            sanitized = sanitized.substring(0, 7000) + "...";
+        }
+
+        return sanitized;
+    }
     public UserType detectUserType(String translatedInput) {
         String clean = translatedInput.trim().toLowerCase();
 

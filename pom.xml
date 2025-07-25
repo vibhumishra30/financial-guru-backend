@@ -6,7 +6,7 @@
 
     <groupId>org.hackathon</groupId>
     <artifactId>financial-guru-backend</artifactId>
-    <version>0.0.8-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
